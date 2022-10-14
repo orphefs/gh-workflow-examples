@@ -1,8 +1,5 @@
-name: auto-approve
-on:
-  pull_request_target:
-    branches:
-      - dev # targets branch dev
+name: Auto approve
+on: pull_request_target
 
 jobs:
   build:
