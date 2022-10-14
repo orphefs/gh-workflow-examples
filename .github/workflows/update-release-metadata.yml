@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - "dev"
-permissions:
-  pull-requests: write
 
 jobs:
   run_if:
@@ -36,6 +34,8 @@ jobs:
 
       - name: Approve pull Request
         uses: hmarr/auto-approve-action@v3
+        permissions:
+          pull-requests: write
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
