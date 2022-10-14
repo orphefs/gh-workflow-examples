@@ -32,8 +32,7 @@ jobs:
           base: dev
 
       - name: Approve pull Request
-        if: ${{ github.event.pull_request.number }}
-        uses: hmarr/auto-approve-action@v2
+        uses: hmarr/auto-approve-action@v3
         with:
           token: ${{ secrets.PAT }}
           pull-request-number: ${{ github.event.pull_request.number }}
