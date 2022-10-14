@@ -3,12 +3,10 @@ on:
   push:
     branches:
       - "dev"
-  pull_request:
-    branches:
-      - "!update-release-metadata-*"
 
 jobs:
-  updateReleaseMetadata:
+  run_if:
+    if: startsWith(github.head_ref, 'update-release-metadata-') != true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
