@@ -1,0 +1,29 @@
+name: update-release-metadata
+on: 
+  push:
+    branches:
+      - 'dev'
+jobs:
+  updateReleaseMetadata:
+    runs-on: ubuntu
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: update-release-metadata
+        run: |
+          bash write_release.sh
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.15.1
+        with:
+          commit_message: Update release metadata
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: update release metadata
+          title: Update release metadata
+          body: Update release metadata to reflect release changes
+          branch: update-release-metadata
+          base: dev
