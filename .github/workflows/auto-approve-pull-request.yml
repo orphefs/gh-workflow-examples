@@ -1,8 +1,6 @@
 name: auto-approve
 on:
   pull_request_target:
-    types:
-      - opened
     branches:
       - dev # targets branch dev
 
