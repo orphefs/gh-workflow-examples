@@ -1,6 +1,5 @@
 name: auto-approve
 on: 
-  push:
   pull_request:
     branches:
       - 'update-release-metadata'
