@@ -8,18 +8,7 @@ jobs:
   run_if:
     if: startsWith(github.head_ref, 'update-release-metadata-') # only run job if the head branch has a certain name
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Pull request number
-        run: |
-          echo "Pull Request Number - ${{ github.event.pull_request.number }}"
-
-      - name: Approve pull Request
-        if: ${{ github.event.pull_request.number }}
-        uses: hmarr/auto-approve-action@v2
-        with:
-          # github-token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ github.event.pull_request.number }}
+      - uses: hmarr/auto-approve-action@v3
