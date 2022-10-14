@@ -22,6 +22,7 @@ jobs:
       #     commit_message: Update release metadata
 
       - name: Create Pull Request
+        id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: update release metadata
@@ -35,4 +36,4 @@ jobs:
         uses: hmarr/auto-approve-action@v3
         with:
           token: ${{ secrets.PAT }}
-          pull-request-number: ${{ github.event.pull_request.number }}
+          pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
