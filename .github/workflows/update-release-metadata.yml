@@ -1,8 +1,8 @@
 name: update-release-metadata
-on: 
+on:
   push:
     branches:
-      - 'dev'
+      - "dev"
 jobs:
   updateReleaseMetadata:
     runs-on: ubuntu-latest
@@ -15,9 +15,9 @@ jobs:
         run: |
           echo "$(git rev-parse HEAD)" >> RELEASE
 
-      - uses: stefanzweifel/git-auto-commit-action@v4.15.1
-        with:
-          commit_message: Update release metadata
+      # - uses: stefanzweifel/git-auto-commit-action@v4.15.1
+      #   with:
+      #     commit_message: Update release metadata
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
