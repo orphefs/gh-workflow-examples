@@ -5,10 +5,10 @@ on:
       - dev # targets branch dev
 
 jobs:
-  run_if:
-    if: startsWith(github.head_ref, 'update-release-metadata-') # only run job if the head branch has a certain name
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - uses: hmarr/auto-approve-action@v3
+  # run_if:
+  # if: startsWith(github.head_ref, 'update-release-metadata-') # only run job if the head branch has a certain name
+  runs-on: ubuntu-latest
+  permissions:
+    pull-requests: write
+  steps:
+    - uses: hmarr/auto-approve-action@v3
