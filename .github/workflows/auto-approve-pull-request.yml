@@ -1,11 +1,14 @@
 name: auto-approve
 on:
-  pull_request:
+  pull_request_target:
+    types:
+      - opened
     branches:
-      - "update-release-metadata-*"
+      - dev # targets branch dev
 
 jobs:
-  autoApprove:
+  run_if:
+    if: startsWith(github.head_ref, 'update-release-metadata-') # only run job if the head branch has a certain name
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
