@@ -26,4 +26,5 @@ jobs:
           title: Update release metadata
           body: Update release metadata to reflect release changes
           branch: update-release-metadata
+          branch-suffix: short-commit-hash
           base: dev
