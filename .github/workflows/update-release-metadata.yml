@@ -30,3 +30,10 @@ jobs:
           branch: update-release-metadata
           branch-suffix: short-commit-hash
           base: dev
+
+      - name: Approve pull Request
+        if: ${{ github.event.pull_request.number }}
+        uses: hmarr/auto-approve-action@v2
+        with:
+          token: ${{ secrets.PAT }}
+          pull-request-number: ${{ github.event.pull_request.number }}
