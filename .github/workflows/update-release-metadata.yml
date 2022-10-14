@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - "dev"
+  pull_request:
+    branches:
+      - "!update-release-metadata-*"
+
 jobs:
   updateReleaseMetadata:
     runs-on: ubuntu-latest
