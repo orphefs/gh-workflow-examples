@@ -31,7 +31,7 @@ jobs:
           title: Update release metadata
           body: Update release metadata to reflect release changes
           branch: update-release-metadata
-          labels: auto-merge
+          labels: automerge
           branch-suffix: short-commit-hash
           base: dev
 
@@ -46,4 +46,4 @@ jobs:
         uses: "pascalgn/automerge-action@v0.15.3"
         env:
           GITHUB_TOKEN: "${{ secrets.PAT }}"
-          MERGE_LABELS: "auto-merge"
+          MERGE_LABELS: "automerge"
