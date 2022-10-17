@@ -1,5 +1,4 @@
 on: pull_request
-
 jobs:
   runs-on: ubuntu-latest
   steps:
