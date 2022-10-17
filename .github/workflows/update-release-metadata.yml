@@ -2,14 +2,13 @@ name: update-release-metadata
 on:
   push:
     branches:
-      - "dev"
+      - dev
+      - main
 
 jobs:
   run_if:
     if: contains(github.event.head_commit.message, 'update-release-metadata-') != true
     runs-on: ubuntu-latest
-    # permissions:
-    #   pull-requests: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -19,11 +18,7 @@ jobs:
         run: |
           echo "$(git rev-parse HEAD)" >> RELEASE
 
-      # - uses: stefanzweifel/git-auto-commit-action@v4.15.1
-      #   with:
-      #     commit_message: Update release metadata
-
-      - name: Create Pull Request
+      - name: Create pull request
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
@@ -33,26 +28,20 @@ jobs:
           branch: update-release-metadata
           labels: automerge
           branch-suffix: short-commit-hash
-          base: dev
+          base: ${{ github.ref_name }}
 
-      - name: Approve pull Request
+      - name: Approve pull request
         uses: hmarr/auto-approve-action@v3
         with:
           github-token: ${{ secrets.PAT }}
           pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
 
-      # - id: automerge
-      #   name: automerge
-      #   uses: "pascalgn/automerge-action@v0.15.3"
-      #   env:
-      #     GITHUB_TOKEN: "${{ secrets.PAT }}"
-      #     MERGE_LABELS: "automerge"
-      #     LOG: "TRACE"
-
-      # - name: Merge
-      #   uses: KeisukeYamashita/auto-pull-request-merge@v1
-      #   with:
-      #     intervalSeconds: 1
-      #     timeoutSeconds: 20
-      #     labels: "automerge"
-      #     token: ${{ secrets.PAT }}
+      - name: Merge pull request
+        run: |
+          gh pr merge $pullRequestNumber --merge
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
+          labels: automerge
+          token: ${{ secrets.PAT }}
+          pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
