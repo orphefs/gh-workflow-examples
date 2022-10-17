@@ -51,7 +51,7 @@ jobs:
 
       - name: List commits on the pull request
         run: |
-          response=$(curl --request GET 
+          response=$(curl --request GET \
           --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.create-pr.outputs.pull-request-number }}/commits' \
           --header 'Authorization: token ${{ secrets.PAT }}' \
           --header 'Accept: application/vnd.github.v3+json' \
