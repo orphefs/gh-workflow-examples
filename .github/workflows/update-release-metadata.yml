@@ -54,7 +54,8 @@ jobs:
         with:
           intervalSeconds: 1
           timeoutSeconds: 5
-          sha: ${{ github.event.pull_request.head.sha }}
+          # sha: ${{ github.event.pull_request.head.sha }}
+          sha: wfwfwer098wr7923r092ruj2309rj23r0923jr
           labels: automerge
           token: ${{ secrets.PAT }}
           pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
