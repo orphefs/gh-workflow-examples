@@ -50,6 +50,7 @@ jobs:
       #     LOG: "TRACE"
 
       - name: List commits on the pull request
+        id: get-commits
         run: |
           RESPONSE=$(curl --request GET \
           --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.create-pr.outputs.pull-request-number }}/commits' \
@@ -75,12 +76,14 @@ jobs:
           latest_commit_sha=$(echo "$latest_commit" | jq -r '.sha')
           echo "$latest_commit_sha"
 
+          echo "{latest_commit_sha}={$latest_commit_sha}" >> $GITHUB_OUTPUT
+
       - name: Merge
         uses: KeisukeYamashita/auto-pull-request-merge@v1
         with:
           intervalSeconds: 1
           timeoutSeconds: 5
-          sha: $(latest_commit_sha)
+          sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
           labels: automerge
           token: ${{ secrets.PAT }}
           pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
