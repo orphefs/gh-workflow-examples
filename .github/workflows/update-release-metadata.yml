@@ -89,7 +89,7 @@ jobs:
       #     pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
       - name: Merge
         run: |
-          gh pr merge $pullRequestNumber
+          gh pr merge $pullRequestNumber --merge
         env:
           GH_TOKEN: ${{ secrets.PAT }}
           sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
