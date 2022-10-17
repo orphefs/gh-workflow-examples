@@ -56,3 +56,4 @@ jobs:
           timeoutSeconds: 20
           labels: automerge
           token: ${{ secrets.PAT }}
+          pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
