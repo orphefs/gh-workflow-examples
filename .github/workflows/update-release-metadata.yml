@@ -57,3 +57,4 @@ jobs:
           labels: automerge
           token: ${{ secrets.PAT }}
           pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
+          sha: ${{ github.event.pull_request.head.sha }}
