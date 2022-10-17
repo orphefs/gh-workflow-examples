@@ -27,7 +27,7 @@ jobs:
           branch: update-release-metadata
           labels: automerge
           branch-suffix: short-commit-hash
-          base: dev
+          base: ${{ github.ref_name }}
 
       - name: Approve pull request
         uses: hmarr/auto-approve-action@v3
