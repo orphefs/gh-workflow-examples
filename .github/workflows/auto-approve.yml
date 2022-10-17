@@ -1,18 +1,16 @@
 name: auto-approve
-on: 
-  push:
+on:
+  # push:
   pull_request:
-    branches:
-      - 'update-release-metadata'
-
+    types: [opened, reopened]
 jobs:
-  autoApprove:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-  
+
       - name: Pull request number
         run: |
           echo "Pull Request Number - ${{ github.event.pull_request.number }}"
@@ -21,6 +19,5 @@ jobs:
         if: ${{ github.event.pull_request.number }}
         uses: hmarr/auto-approve-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
           pull-request-number: ${{ github.event.pull_request.number }}
-

@@ -1,11 +1,15 @@
 name: update-release-metadata
-on: 
+on:
   push:
     branches:
-      - 'dev'
+      - "dev"
+
 jobs:
-  updateReleaseMetadata:
-    runs-on: ubuntu
+  run_if:
+    if: contains(github.event.head_commit.message, 'update-release-metadata-') != true
+    runs-on: ubuntu-latest
+    # permissions:
+    #   pull-requests: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -13,17 +17,33 @@ jobs:
 
       - name: update-release-metadata
         run: |
-          bash write_release.sh
+          echo "$(git rev-parse HEAD)" >> RELEASE
 
-      - uses: stefanzweifel/git-auto-commit-action@v4.15.1
-        with:
-          commit_message: Update release metadata
+      # - uses: stefanzweifel/git-auto-commit-action@v4.15.1
+      #   with:
+      #     commit_message: Update release metadata
 
       - name: Create Pull Request
+        id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: update release metadata
           title: Update release metadata
           body: Update release metadata to reflect release changes
           branch: update-release-metadata
+          labels: automerge
+          branch-suffix: short-commit-hash
           base: dev
+
+      - name: Approve pull Request
+        uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: ${{ secrets.PAT }}
+          pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
+
+      - id: automerge
+        name: automerge
+        uses: "pascalgn/automerge-action@v0.15.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.PAT }}"
+          MERGE_LABELS: "automerge"
