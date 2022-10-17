@@ -41,10 +41,16 @@ jobs:
           github-token: ${{ secrets.PAT }}
           pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
 
-      - id: automerge
-        name: automerge
-        uses: "pascalgn/automerge-action@v0.15.3"
-        env:
-          GITHUB_TOKEN: "${{ secrets.PAT }}"
-          MERGE_LABELS: "automerge"
-          LOG: "TRACE"
+      # - id: automerge
+      #   name: automerge
+      #   uses: "pascalgn/automerge-action@v0.15.3"
+      #   env:
+      #     GITHUB_TOKEN: "${{ secrets.PAT }}"
+      #     MERGE_LABELS: "automerge"
+      #     LOG: "TRACE"
+
+      - name: Merge
+        uses: KeisukeYamashita/auto-pull-request-merge@v1
+        with:
+          intervalSeconds: 10
+          timeoutSeconds: 30
