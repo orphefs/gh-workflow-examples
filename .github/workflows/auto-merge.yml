@@ -1,5 +1,7 @@
 on:
-  pull_request:
+  pull_request_target:
+    branches:
+      - dev
 
 jobs:
   automerge:
