@@ -9,5 +9,5 @@ jobs:
         with:
           intervalSeconds: 10
           timeoutSeconds: 20
-          labels: "automerge"
+          labels: automerge
           token: ${{ secrets.PAT }}
