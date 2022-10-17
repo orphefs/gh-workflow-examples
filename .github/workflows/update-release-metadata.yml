@@ -91,6 +91,7 @@ jobs:
         run: |
           gh pr merge $pullRequestNumber
         env:
+          GH_TOKEN: ${{ secrets.PAT }}
           sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
           labels: automerge
           token: ${{ secrets.PAT }}
