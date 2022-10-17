@@ -5,8 +5,8 @@ jobs:
   automerge:
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v2
-       with:
+      - uses: actions/checkout@v3
+        with:
           token: ${{ secrets.PAT }}
       - uses: KeisukeYamashita/auto-pull-request-merge@v1
         with:
