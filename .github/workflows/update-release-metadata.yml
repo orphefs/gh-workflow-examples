@@ -47,3 +47,4 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.PAT }}"
           MERGE_LABELS: "automerge"
+          LOG: "TRACE"
