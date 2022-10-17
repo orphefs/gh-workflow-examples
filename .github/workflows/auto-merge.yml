@@ -1,0 +1,16 @@
+name: auto-merge
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: KeisukeYamashita/auto-pull-request-merge@v1
+        with:
+          intervalSeconds: 10
+          timeoutSeconds: 20
+          labels: automerge
+          token: ${{ secrets.PAT }}
