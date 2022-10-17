@@ -3,8 +3,7 @@ on: pull_request
 jobs:
   runs-on: ubuntu-latest
   steps:
-    - name: Merge
-      uses: KeisukeYamashita/auto-pull-request-merge@v1
+    - uses: KeisukeYamashita/auto-pull-request-merge@v1
       with:
         intervalSeconds: 10
         timeoutSeconds: 20
