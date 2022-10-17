@@ -1,0 +1,19 @@
+name: build-execute-after-update-release-metadata
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  run_if:
+    if: startsWith(github.event.head_commit.message, 'Merge pull request') == true && contains(github.event.head_commit.message, 'update-release-metadata-') == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: build-execute
+        run: |
+          echo "Insert your build-execute action here."
