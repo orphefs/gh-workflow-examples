@@ -53,8 +53,8 @@ jobs:
         uses: KeisukeYamashita/auto-pull-request-merge@v1
         with:
           intervalSeconds: 1
-          timeoutSeconds: 20
+          timeoutSeconds: 5
+          sha: ${{ github.event.pull_request.head.sha }}
           labels: automerge
           token: ${{ secrets.PAT }}
           pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
-          sha: ${{ github.event.pull_request.head.sha }}
