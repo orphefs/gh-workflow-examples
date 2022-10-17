@@ -8,8 +8,6 @@ jobs:
   run_if:
     if: contains(github.event.head_commit.message, 'update-release-metadata-') != true
     runs-on: ubuntu-latest
-    # permissions:
-    #   pull-requests: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -18,10 +16,6 @@ jobs:
       - name: update-release-metadata
         run: |
           echo "$(git rev-parse HEAD)" >> RELEASE
-
-      # - uses: stefanzweifel/git-auto-commit-action@v4.15.1
-      #   with:
-      #     commit_message: Update release metadata
 
       - name: Create Pull Request
         id: create-pr
@@ -41,52 +35,6 @@ jobs:
           github-token: ${{ secrets.PAT }}
           pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
 
-      # - id: automerge
-      #   name: automerge
-      #   uses: "pascalgn/automerge-action@v0.15.3"
-      #   env:
-      #     GITHUB_TOKEN: "${{ secrets.PAT }}"
-      #     MERGE_LABELS: "automerge"
-      #     LOG: "TRACE"
-
-      - name: List commits on the pull request
-        id: get-commits
-        run: |
-          RESPONSE=$(curl --request GET \
-          --url 'https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.create-pr.outputs.pull-request-number }}/commits' \
-          --header 'Authorization: token ${{ secrets.PAT }}' \
-          --header 'Accept: application/vnd.github.v3+json' \
-          --header 'Content-Type: application/json')
-
-          echo "Get length of the array:"
-          length=$(echo "$RESPONSE" | jq 'length')
-
-          echo "Get index of the latest commit:"
-          index=$(($length - 1))
-
-          echo "Get context of the latest commit:"
-          latest_commit=$(echo "$RESPONSE" | jq --argjson index $index '.[$index]')
-          echo "$latest_commit"
-
-          echo "Get commit message of the latest commit:"
-          latest_commit_message=$(echo "$latest_commit" | jq -r '.commit.message')
-          echo "$latest_commit_message"
-
-          echo "Get commit SHA of the latest commit:"
-          latest_commit_sha=$(echo "$latest_commit" | jq -r '.sha')
-          echo "$latest_commit_sha"
-
-          echo "latest_commit_sha=$latest_commit_sha" >> $GITHUB_OUTPUT
-
-      # - name: Merge
-      #   uses: KeisukeYamashita/auto-pull-request-merge@v1
-      #   with:
-      #     intervalSeconds: 1
-      #     timeoutSeconds: 5
-      #     sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
-      #     labels: automerge
-      #     token: ${{ secrets.PAT }}
-      #     pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
       - name: Merge
         run: |
           gh pr merge $pullRequestNumber --merge
