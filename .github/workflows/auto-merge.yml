@@ -8,11 +8,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT }}
-      - uses: KeisukeYamashita/auto-pull-request-merge@v1
-        with:
-          intervalSeconds: 1
-          timeoutSeconds: 5
-          # sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
-          labels: automerge
-          token: ${{ secrets.PAT }}
-          # pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
+      # - uses: KeisukeYamashita/auto-pull-request-merge@v1
+      #   with:
+      #     intervalSeconds: 1
+      #     timeoutSeconds: 5
+      #     # sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
+      #     labels: automerge
+      #     token: ${{ secrets.PAT }}
+      #     # pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
