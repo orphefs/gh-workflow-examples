@@ -76,7 +76,7 @@ jobs:
           latest_commit_sha=$(echo "$latest_commit" | jq -r '.sha')
           echo "$latest_commit_sha"
 
-          echo "{latest_commit_sha}={$latest_commit_sha}" >> $GITHUB_OUTPUT
+          echo "latest_commit_sha=$(latest_commit_sha)" >> $GITHUB_OUTPUT
 
       - name: Merge
         uses: KeisukeYamashita/auto-pull-request-merge@v1
