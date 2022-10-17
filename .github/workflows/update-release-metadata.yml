@@ -2,7 +2,7 @@ name: update-release-metadata
 on:
   push:
     branches:
-      - "dev"
+      - dev
 
 jobs:
   run_if:
@@ -17,7 +17,7 @@ jobs:
         run: |
           echo "$(git rev-parse HEAD)" >> RELEASE
 
-      - name: Create Pull Request
+      - name: Create pull request
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
@@ -29,13 +29,13 @@ jobs:
           branch-suffix: short-commit-hash
           base: dev
 
-      - name: Approve pull Request
+      - name: Approve pull request
         uses: hmarr/auto-approve-action@v3
         with:
           github-token: ${{ secrets.PAT }}
           pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
 
-      - name: Merge
+      - name: Merge pull request
         run: |
           gh pr merge $pullRequestNumber --merge
         env:
