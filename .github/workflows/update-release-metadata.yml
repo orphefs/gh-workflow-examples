@@ -52,7 +52,7 @@ jobs:
       - name: Merge
         uses: KeisukeYamashita/auto-pull-request-merge@v1
         with:
-          intervalSeconds: 10
+          intervalSeconds: 1
           timeoutSeconds: 20
           labels: "automerge"
           token: ${{ secrets.PAT }}
