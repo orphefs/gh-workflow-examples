@@ -87,3 +87,11 @@ jobs:
       #     labels: automerge
       #     token: ${{ secrets.PAT }}
       #     pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
+      - name: Merge
+        run: |
+          gh pr merge $pullRequestNumber
+        env:
+          sha: ${{ steps.get-commits.outputs.latest_commit_sha }}
+          labels: automerge
+          token: ${{ secrets.PAT }}
+          pullRequestNumber: ${{ steps.create-pr.outputs.pull-request-number }}
