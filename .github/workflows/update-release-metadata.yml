@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - dev
+      - main
 
 jobs:
   run_if:
