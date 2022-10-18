@@ -14,6 +14,5 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: build-execute
-        run: |
-          echo "Insert your build-execute action here."
+      - name: Call build-test-dev workflow
+        uses: ./.github/workflows/build-test-dev.yaml
