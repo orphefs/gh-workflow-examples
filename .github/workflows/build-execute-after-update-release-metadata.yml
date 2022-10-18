@@ -8,4 +8,4 @@ on:
 jobs:
   call-build-test-workflow:
     if: startsWith(github.event.head_commit.message, 'Merge pull request') == true && contains(github.event.head_commit.message, 'update-release-metadata-') == true
-    - uses: ./.github/workflows/build-test-dev.yaml
+    uses: ./.github/workflows/build-test-dev.yaml
