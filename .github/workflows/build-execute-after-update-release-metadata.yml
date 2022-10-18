@@ -6,14 +6,6 @@ on:
       - main
 
 jobs:
-  run_if:
+  call-build-test-workflow:
     if: startsWith(github.event.head_commit.message, 'Merge pull request') == true && contains(github.event.head_commit.message, 'update-release-metadata-') == true
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: build-execute
-        run: |
-          echo "Insert your build-execute action here."
+    uses: ./.github/workflows/build-test-dev.yaml
