@@ -6,12 +6,6 @@ on:
       - main
 
 jobs:
-  run_if:
+  call-build-test-workflow:
     if: startsWith(github.event.head_commit.message, 'Merge pull request') == true && contains(github.event.head_commit.message, 'update-release-metadata-') == true
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Call build-test-dev workflow
-        uses: ./.github/workflows/build-test-dev.yaml
+    - uses: ./.github/workflows/build-test-dev.yaml
