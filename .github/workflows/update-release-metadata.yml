@@ -7,7 +7,7 @@ on:
 
 jobs:
   run_if:
-    if: startsWith(github.event.head_commit.message, 'Merge pull request') != true && contains(github.event.head_commit.message, 'update-release-metadata-') != true
+    if: startsWith(github.event.head_commit.message, 'Merge pull request') == true && contains(github.event.head_commit.message, 'update-release-metadata-') != true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
