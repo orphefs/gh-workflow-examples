@@ -25,4 +25,4 @@ jobs:
           fetch-depth: 0
       - name: build-and-test
         run: |
-          echo 'This is where the magic happens.'
+          echo 'This is where we build and test our container image.'
