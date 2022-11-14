@@ -25,7 +25,7 @@ jobs:
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.MAML_SA_PAT }}
+          token: ${{ secrets.PAT }}
           commit-message: update release metadata
           title: Update release metadata
           body: Update release metadata to reflect release changes
