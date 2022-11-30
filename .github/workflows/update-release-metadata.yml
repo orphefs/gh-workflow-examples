@@ -9,6 +9,9 @@ jobs:
   run_if:
     if: startsWith(github.event.head_commit.message, 'Merge pull request') == true && contains(github.event.head_commit.message, 'update-release-metadata-') != true
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -22,6 +25,7 @@ jobs:
         id: create-pr
         uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ secrets.PAT }}
           commit-message: update release metadata
           title: Update release metadata
           body: Update release metadata to reflect release changes
@@ -33,7 +37,7 @@ jobs:
       - name: Approve pull request
         uses: hmarr/auto-approve-action@v3
         with:
-          github-token: ${{ secrets.PAT }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           pull-request-number: ${{ steps.create-pr.outputs.pull-request-number }}
 
       - name: Merge pull request

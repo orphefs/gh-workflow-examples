@@ -1,11 +1,11 @@
-name: Build and test DEV
+name: Build and test PROD
 
 on:
   workflow_dispatch:
     inputs:
       ENV:
         description: environment to build and test
-        default: dev
+        default: main
         required: false
       PIPELINE:
         description: pipeline to run
@@ -14,12 +14,12 @@ on:
   workflow_call:
 
 jobs:
-  build-and-test:
+  build-and-test-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: build-and-test-dev
+      - name: build-and-test
         run: |
           echo 'This is where we build and test our container image.'
