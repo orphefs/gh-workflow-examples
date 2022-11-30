@@ -11,10 +11,10 @@ jobs:
       ${{ github.ref == 'refs/heads/dev' }} && 
       startsWith(github.event.head_commit.message, 'Merge pull request') == true &&
       contains(github.event.head_commit.message, 'update-release-metadata-') == true
-    uses: ./.github/workflows/tekton-build-test-dev.yaml
+    uses: ./.github/workflows/build-test-dev.yaml
   call-build-test-workflow-prod:
     if: |
       ${{ github.ref == 'refs/heads/main' }} && 
       startsWith(github.event.head_commit.message, 'Merge pull request') == true && 
       contains(github.event.head_commit.message, 'update-release-metadata-') == true
-    uses: ./.github/workflows/tekton-build-test-prod.yaml
+    uses: ./.github/workflows/build-test-prod.yaml
