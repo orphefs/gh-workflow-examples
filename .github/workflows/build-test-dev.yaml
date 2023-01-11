@@ -23,3 +23,10 @@ jobs:
       - name: build-and-test-dev
         run: |
           echo 'This is where we build and test our container image.'
+      - name: Get Current Job Log URL
+        uses: Tiryoh/gha-jobid-action@v0
+        id: jobs
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          job_name: build-and-test-dev
+          per_page: 30
