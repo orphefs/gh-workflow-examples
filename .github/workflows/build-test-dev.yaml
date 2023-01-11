@@ -29,3 +29,6 @@ jobs:
       - run: |
           echo $GH_JOB_0_ID
           env | grep GH_JOB
+          STRING_PARSED_FROM_LOG=$(gh api -i '/repos/orphefs/gh-workflow-examples/actions/jobs/$GH_JOB_0_ID/logs' | grep "This is where")
+          echo $STRING_PARSED_FROM_LOG
+          
