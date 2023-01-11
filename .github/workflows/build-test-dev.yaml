@@ -13,8 +13,7 @@ on:
         required: false
   workflow_call:
 
-env:
-  GH_TOKEN: ${{ github.token }}
+
 
 jobs:
   build-and-test:
@@ -34,4 +33,6 @@ jobs:
           env | grep GH_JOB
           STRING_PARSED_FROM_LOG=$(gh api -i '/repos/orphefs/gh-workflow-examples/actions/jobs/$GH_JOB_0_ID/logs' | grep "This is where")
           echo $STRING_PARSED_FROM_LOG
+        env:
+          GH_TOKEN: ${{ github.token }}
           
