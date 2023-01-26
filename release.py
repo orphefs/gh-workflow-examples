@@ -1,4 +1,4 @@
 release_metadata = {
-  "release_version": "v1.1.1",
-  "commit_hash": "599ba5b5a53456b38f6c072bc097634bdd743a5d"
+  "release_version": "",
+  "commit_hash": "4fd97e13082c8755e17b2e0ded8e4bf6e4a98ff3"
 }
