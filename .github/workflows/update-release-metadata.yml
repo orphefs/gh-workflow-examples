@@ -21,7 +21,7 @@ jobs:
           
       - name: Display commit message
         run: |
-          echo ${{ env.commitmsg }}
+          echo "${{ env.commitmsg }}"
 
       - name: update-release-metadata
         run: |
