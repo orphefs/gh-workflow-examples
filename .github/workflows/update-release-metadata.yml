@@ -25,7 +25,8 @@ jobs:
 
       - name: update-release-metadata
         run: |
-          bash write_release.sh OUTPUT_PATH="./" RELEASE_VERSION="$( '${{ env.commitmsg }}' | sed -nr 's/(^.*release-)//p' )"
+          RELEASE_VERSION=$(echo '${{ env.commitmsg }}' | sed -nr 's/(^.*release-)//p')
+          bash write_release.sh OUTPUT_PATH="./" RELEASE_VERSION="$RELEASE_VERSION"
 
       - name: Create pull request
         id: create-pr
