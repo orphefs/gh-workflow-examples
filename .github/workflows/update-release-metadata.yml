@@ -19,7 +19,7 @@ jobs:
 
       - name: update-release-metadata
         run: |
-          bash write_release.sh OUTPUT_PATH="./" RELEASE_VERSION="v1.1.1"
+          bash write_release.sh OUTPUT_PATH="./" RELEASE_VERSION="$( ${{ github.event.head_commit.message }} | sed -nr 's/(^.*release-)//p' )"
 
       - name: Create pull request
         id: create-pr
