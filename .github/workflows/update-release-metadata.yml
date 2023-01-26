@@ -8,6 +8,8 @@ on:
 jobs:
   run_if:
     if: startsWith(github.event.head_commit.message, 'Merge pull request') == true && contains(github.event.head_commit.message, 'update-release-metadata-') != true && contains(github.event.head_commit.message, 'release-')
+    env:
+      commitmsg: ${{ github.event.head_commit.message }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -19,7 +21,7 @@ jobs:
 
       - name: update-release-metadata
         run: |
-          bash write_release.sh OUTPUT_PATH="./" RELEASE_VERSION="$( ${{ github.event.head_commit.message }} | sed -nr 's/(^.*release-)//p' )"
+          bash write_release.sh OUTPUT_PATH="./" RELEASE_VERSION="$( ${{ env.commitmsg }} | sed -nr 's/(^.*release-)//p' )"
 
       - name: Create pull request
         id: create-pr
