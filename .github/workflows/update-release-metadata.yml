@@ -19,7 +19,7 @@ jobs:
 
       - name: update-release-metadata
         run: |
-          echo "$(git rev-parse HEAD)" >> RELEASE
+          bash write_release.sh OUTPUT_PATH="./" RELEASE_VERSION="v1.1.1"
 
       - name: Create pull request
         id: create-pr
